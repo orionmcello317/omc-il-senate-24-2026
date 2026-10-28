@@ -1,0 +1,37 @@
+name: District 24 Live Sync Pipeline
+
+on:
+  workflow_dispatch: # Allows you to manually click a button on GitHub to force an immediate refresh
+  schedule:
+    # This cron trigger runs automatically every 5 minutes.
+    # It executes hourly updates to keep your live page current on election night.
+    - cron: '*/5 * * * *'
+
+jobs:
+  scrape-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Grants the server explicit permission to save the data back to your repo
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    - name: Set up Python Environment
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install System Dependencies
+      run: |
+        pip install requests beautifulsoup4
+
+    - name: Execute Live Scraper Engine
+      run: python scraper.py
+
+    - name: Commit and Push Updated Election Data
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add data/results.json
+        # Only commit and push if data/results.json actually changed to avoid redundant errors
+        git diff-index --quiet HEAD || (git commit -m "Automated election sync update [skip ci]" && git push)
