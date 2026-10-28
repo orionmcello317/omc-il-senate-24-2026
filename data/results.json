@@ -1,0 +1,32 @@
+{
+    "last_updated": "2026-10-28T06:50:34.575908",
+    "precincts_reporting": 0,
+    "total_precincts": 18,
+    "reporting_percentage": 0.0,
+    "candidates": [
+        {
+            "name": "Seth Lewis (REP)",
+            "votes": 0,
+            "percentage": 0
+        },
+        {
+            "name": "Benjamin McAdams (DEM)",
+            "votes": 0,
+            "percentage": 0
+        }
+    ],
+    "breakdown": {
+        "cook_county": {
+            "Lewis": 0,
+            "McAdams": 0,
+            "PrecinctsReporting": 0,
+            "TotalPrecincts": 18
+        },
+        "dupage_county": {
+            "Lewis": 0,
+            "McAdams": 0,
+            "PrecinctsReporting": 0,
+            "TotalPrecincts": 0
+        }
+    }
+}
